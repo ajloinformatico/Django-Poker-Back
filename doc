@@ -1,0 +1,9 @@
+virtualenv poker-env -p python3
+source poker-env/bin/activate
+pip install django
+pip install pillow
+django-admin startproject poker
+python3 manage.py migrate
+python3 manage.py createsuperuser
+python3 manage.py startapp poker
+created templates at the same level that manaage

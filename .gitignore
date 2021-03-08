@@ -1,0 +1,10 @@
+
+poker/.DS_Store
+.idea/dbnavigator.xml
+.idea/Django-Poker-Back.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+*.pyc
+.DS_Store
