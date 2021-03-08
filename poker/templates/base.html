@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}
+    {% endblock title %}</title>
+    <meta name="description" content="Django  poker game app">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+<header>
+    <h2>POKER DJNAGO-APP</h2>
+</header>
+<body>
+{% block content %}
+{% endblock content %}
+<footer class='footerFixed'>
+        <p>page coded by <a href="https://github.com/ajloinformatico" target="_blank" title="Github page">ajloinformatico.</a>
+            I´m open source.
+            Copyright © 2020 INFOLOJO
+        </p>
+</footer>
+ <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+</body>
+</html>

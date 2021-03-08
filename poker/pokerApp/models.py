@@ -14,6 +14,7 @@ def upload_image(instance, filename):
 class Player(models.Model):  # extends model
     name = models.CharField(max_length=60)
     surname = models.CharField(max_length=60)
+    password = models.CharField(max_length=30)
     nick = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     age = models.IntegerField()

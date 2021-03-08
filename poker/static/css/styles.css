@@ -1,0 +1,12 @@
+:root{
+    --color-back: #000000;
+    --color: #ffffff
+}
+
+
+
+html{
+    background-color: var(--color-back);
+    color: var(--color);
+
+}
