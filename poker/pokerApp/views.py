@@ -16,7 +16,8 @@ def login(request):
                     field.get_password() == form_post_values[1]:
                 # Find player
                 ctx = [request.POST['email']]
-                return render(crud, 'crud', ctx)
+                #redirect ru crud view with player id
+                return redirect('crud/'+str(field.get_id()))
         # not player found
         ctx['error'] = 'si'
     return render(request, 'index.html', ctx)
@@ -46,15 +47,19 @@ def sigin(request):
             if str(field).split(" ")[1] == form_post_values[0] or str(field).split(" ")[2] == form_post_values[1]:
                 print(form_post_values)
                 ctx['error'] = 'si'
-                return render(request, 'signin.html', ctx)
+                return render(request, 'signin.html/', ctx)
         # if not find player return crud
         if form.is_valid():
             form.save()
             # TODO FILTER WITH PLAYER MATCHES
-            return redirect('crud');
+            return redirect('crud/'+field.id);
 
 def crud(request, id):
-    return render(request, 'crud.html')
+    current_player = Player.objects.get(id=id)
+    ctx = {
+        'current_player' : current_player
+    }
+    return render(request, 'crud.html', ctx)
 
 
 def matches(request):
