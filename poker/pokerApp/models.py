@@ -20,9 +20,9 @@ class Player(models.Model):  # extends model
     email = models.EmailField(unique=True)
     age = models.IntegerField()
     country = models.CharField(max_length=30)
-    money = models.IntegerField()
-    matches = models.ManyToManyField('Match', default=None)
-    avatar = models.ImageField(upload_to=upload_image, default=None)
+    money = models.IntegerField(default=20, blank=True, null=True)
+    matches = models.ManyToManyField('Match', default=None, blank=True, null=True)
+    avatar = models.ImageField(upload_to=upload_image, default=None, blank=True, null=True)
 
 
     def get_id(self):
