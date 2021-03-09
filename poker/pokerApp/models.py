@@ -15,7 +15,7 @@ class Player(models.Model):  # extends model
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=60)
     surname = models.CharField(max_length=60)
-    password = models.CharField(max_length=30, default=None)
+    password = models.CharField(max_length=30, default="pestillo01")
     nick = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     age = models.IntegerField()
@@ -35,7 +35,7 @@ class Player(models.Model):  # extends model
         return self.password
 
     def __str__(self):
-        return str(self)
+        return super().__str__()
 
 
 class Match(models.Model):
@@ -46,4 +46,4 @@ class Match(models.Model):
     date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} {self.money} {self.date}"
+        return super().__str__()
