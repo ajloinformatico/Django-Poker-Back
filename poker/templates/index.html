@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}{{ Login }}{% endblock %}
 {% block content %}
+{% if error %}
+        <script>
+            alert('The user does not exist\nPlease register a new one');
+        </script>
+{% endif %}
     <h1>LOGIN</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

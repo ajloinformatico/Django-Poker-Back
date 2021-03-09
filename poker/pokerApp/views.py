@@ -12,8 +12,8 @@ def login(request):
         form_post_values = [request.POST['email'], request.POST['password']]
         # loop the query separating by lists
         for field in Player.objects.all():
-            if str(field).split(" ")[1] == form_post_values[0] and \
-                    str(field).split(" ")[2] == form_post_values[1]:
+            if field.get_email() == form_post_values[0] and \
+                    field.get_password() == form_post_values[1]:
                 # Find player
                 ctx = [request.POST['email']]
                 return render(crud, 'crud', ctx)
