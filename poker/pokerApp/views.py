@@ -17,7 +17,7 @@ def login(request):
                 # Find player
                 ctx = [request.POST['email']]
                 #redirect ru crud view with player id
-                return redirect('crud/'+str(field.get_id()))
+                return redirect('/crud/'+str(field.get_id()))
         # not player found
         ctx['error'] = 'si'
     return render(request, 'index.html', ctx)
@@ -29,30 +29,28 @@ def sigin(request):
         ctx = {
             'sign_inform':SignInform()
         }
-        print("hy")
         return render(request, 'signin.html', ctx)
     if request.method == 'POST':
-        # save data form
+        # save data form to save
         form = SignInform(request.POST)
         ctx = {
             'sign_inform': form
         }
         form_post_values = [request.POST['name'], request.POST['surname'],
-            request.POST['password'], request.POST['nick'], request.POST['nick'],
-            request.POST['email'], request.POST['age'], request.POST['country'],
-            request.POST['money'], request.POST['matches'],request.POST['avatar']]
+            request.POST['password'], request.POST['nick'],request.POST['email'], 
+            request.POST['age'], request.POST['country'], request.POST['money']]
 
-        # loop on all players if found player send error
+        # check if player exists by 3mail and name + surname
         for field in Player.objects.all():
-            if str(field).split(" ")[1] == form_post_values[0] or str(field).split(" ")[2] == form_post_values[1]:
+            if field.get_email() == form_post_values[4] or field.get_name() == form_post_values[0] \
+                and field.get_surname() == form_post_values[1]:
                 print(form_post_values)
                 ctx['error'] = 'si'
                 return render(request, 'signin.html/', ctx)
         # if not find player return crud
         if form.is_valid():
             form.save()
-            # TODO FILTER WITH PLAYER MATCHES
-            return redirect('crud/'+field.id);
+            return redirect('/crud/'+str(field.get_id()));
 
 def crud(request, id):
     current_player = Player.objects.get(id=id)

@@ -18,7 +18,7 @@ class Player(models.Model):  # extends model
     password = models.CharField(max_length=30, default="pestillo01")
     nick = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
-    age = models.IntegerField()
+    age = models.IntegerField(default=20)
     country = models.CharField(max_length=30)
     money = models.IntegerField(default=20, blank=True, null=True)
     matches = models.ManyToManyField('Match', default=None, blank=True, null=True)
@@ -27,6 +27,12 @@ class Player(models.Model):  # extends model
 
     def get_id(self):
         return self.id
+
+    def get_name(self):
+        return self.name
+
+    def get_surname(self):
+        return self.surname
 
     def get_email(self):
         return self.email
