@@ -63,10 +63,26 @@ def crud(request, id):
     return render(request, 'crud.html', ctx)
 
 
-def add_match(request):
-    return render(request, 'add_matche.html')
+def add_match(request, player_id):
+    ctx = dict()
+    ctx['match_form'] = MatchForm()
+
+    if request.method == 'GET':
+        ctx['current_player'] = Player.objects.get(id=player_id)
+    if request.method == 'POST':
+        match_form = MatchForm(request.POST)
+        ctx['current_player'] = Player.objects.get(id=request.POST['player_id'])
+            
+        if match_form.is_valid():
+            match_form.save()
+            ctx['match_form'] = None
+            ctx['matches'] = Match.objects.all()
+            return render(request, 'crud.html', ctx)
+
+    return render(request, 'add_match.html', ctx)
 
 def edit_match(request, player_id, team_id):
+    # TODO REFACTOR LIKE add_match
     global ctx
     match = Match.objects.get(id=team_id)
     #print(match)
@@ -78,7 +94,6 @@ def edit_match(request, player_id, team_id):
         }     
     
     if request.method == 'POST':
-        # TODO: CHECK IF ONLY WITH POST PASS
         match_form = MatchForm(request.POST, instance=match)
         ctx = {
             'current_player' : Player.objects.get(id=request.POST['player_id']),

@@ -8,7 +8,7 @@
         {% csrf_token %}
         <input type="hidden" name="player_id" value="{{current_player.id}}"/>
         {{match_form}}
-        <input type="submit" value="edit" title="edit"/>
+        <input type="submit" value="Edit" title="edit"/>
     </form>
     <a class="button" href="{% url 'crud' current_player.id %}">
         return back to matches
