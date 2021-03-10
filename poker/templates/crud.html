@@ -3,7 +3,8 @@
 {% block current_player %}Welcome <b> {{current_player.nick}}</b>{% endblock current_player %}
 {% block content %}
     <h1>Matches</h1>
-     <table>
+    {% if  matches %}
+    <table>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -26,6 +27,10 @@
                
             </tbody>
         </table>
+    {% else %}
+        <p>Not matches, please add new</p>
+    {% endif %}
+     
         <p>New Match
             <a href="{% url 'add_match' current_player.id %}"><i class="far fa-plus-square fa-2x"></i></a>
         </p>

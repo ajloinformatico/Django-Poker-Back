@@ -6,13 +6,14 @@
             alert('Error:\nThe user does not exist\nPlease register a new one');
         </script>
 {% endif %}
-    <h1>LOGIN</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <h4>LOGIN</h4>
+    <form class="form mt-1 mb-1" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{login_form.as_p}}
-        <input type="submit" value="submit" title="login">
+        <input class="btn btn-success" type="submit" value="submit" title="login">
     </form>
-    <a class="button" href="{% url 'signin' %}">
+
+    <a class="btn btn-primary" href="{% url 'signin' %}">
         Dont have an account?
     </a>
 {% endblock content %}
