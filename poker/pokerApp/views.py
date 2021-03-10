@@ -82,24 +82,20 @@ def add_match(request, player_id):
     return render(request, 'add_match.html', ctx)
 
 def edit_match(request, player_id, team_id):
-    # TODO REFACTOR LIKE add_match
-    global ctx
+    ctx = dict()
     match = Match.objects.get(id=team_id)
-    #print(match)
     if request.method == 'GET':
         match_form = MatchForm(instance=match)
         ctx = {
             'current_player' : Player.objects.get(id= player_id),
             'match_form' : match_form
         }     
-    
     if request.method == 'POST':
         match_form = MatchForm(request.POST, instance=match)
         ctx = {
             'current_player' : Player.objects.get(id=request.POST['player_id']),
             'match_form': match_form
         }
-        print("yes")
         if match_form.is_valid():
             match_form.save()
             ctx['matches_form'] = None
@@ -113,5 +109,9 @@ def edit_match(request, player_id, team_id):
 def delete_match(request, player_id, team_id):
     current_match = Match.objects.get(id=team_id)
     current_match.delete()
+    ctx = {
+        'current_player' : Player.objects.get(id=player_id),
+        'matches' : Match.objects.all()
+    }
     # redirect to crud with player id
-    return redirect('crud/'+player_id);
+    return render (request, 'crud.html', ctx);
