@@ -7,13 +7,14 @@
         </script>
 {% endif %}
     <h4>LOGIN</h4>
-    <form class="form mt-1 mb-1" action="" method="POST" enctype="multipart/form-data">
+    <form class="text-center mt-5 mb-1" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{login_form.as_p}}
         <input class="btn btn-success" type="submit" value="submit" title="login">
+
+        <a class="btn btn-primary" href="{% url 'signin' %}">
+            Dont have an account?
+        </a>
     </form>
 
-    <a class="btn btn-primary" href="{% url 'signin' %}">
-        Dont have an account?
-    </a>
 {% endblock content %}
