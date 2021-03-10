@@ -48,8 +48,9 @@ class Match(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=60)
     money = models.IntegerField()
-    players = models.ManyToManyField('Player')
+    #players = models.ManyToManyField('Player')
     date = models.DateField(auto_now=True)
+
 
     def __str__(self):
         return super().__str__()

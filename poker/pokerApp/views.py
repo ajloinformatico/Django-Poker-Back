@@ -54,11 +54,47 @@ def sigin(request):
 
 def crud(request, id):
     current_player = Player.objects.get(id=id)
+    matches = Match.objects.all()
+    
     ctx = {
-        'current_player' : current_player
+        'current_player' : current_player,
+        'matches' : matches
     }
     return render(request, 'crud.html', ctx)
 
 
-def matches(request):
-    return render(request, 'matches.html')
+def add_match(request):
+    return render(request, 'add_matche.html')
+
+def edit_match(request, player_id, team_id):
+    global ctx
+    match = Match.objects.get(id=team_id)
+    #print(match)
+    if request.method == 'GET':
+        
+        match_form = MatchForm(instance=match)
+        
+        ctx = {
+            'current_player' : Player.objects.get(id= player_id),
+            'match_form' : match_form
+        }     
+    """
+    if request.method == 'POST':
+        # TODO: CHECK IF ONLY WITH POST PASS
+        match_form = MatchForm(request.POST, instance=Match)
+        ctx = {
+            'current_player' : Player.objects.get(id=int(request.POST['player_id'])),
+            'match_form': match_form
+        }
+        if match_form.is_valid():
+            match_form.save()
+            return redirect('crud/'+request.POST['player_id'])
+    """
+
+    return render(request, 'edit_match.html', ctx)
+
+def delete_match(request, player_id, team_id):
+    current_match = Match.objects.get(id=team_id)
+    current_match.delete()
+    # redirect to crud with player id
+    return redirect('crud/'+player_id);

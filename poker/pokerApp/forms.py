@@ -65,4 +65,10 @@ class SignInform(forms.ModelForm):
                 },),
         }
 
+
+class MatchForm(forms.ModelForm):
+    class Meta:
+        model= Match
+        fields = '__all__'
+
         

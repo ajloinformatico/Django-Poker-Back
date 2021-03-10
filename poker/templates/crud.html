@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
-{% block title %}{{ Crud }}{% endblock %}
+{% block title %}{{ Matches }}{% endblock %}
 {% block current_player %}Welcome <b> {{current_player.nick}}</b>{% endblock current_player %}
 {% block content %}
-    <h1>Crud</h1>
-
+    <h1>Matches</h1>
+     <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Money</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for match in matches %}
+                <tr>
+                    <td>{{match.name}}</td>
+                    <td>{{match.money}}</td>
+                    <td><a href="{% url 'edit_match' current_player.id match.id %}" alt="edit car" title="edit car">
+                            <i class="fas fa-edit fa-2x"></i>
+                        </a>  
+                        <a href="{% url 'delete_match' current_player.id match.id %}">
+                            <i class="far fa-trash-alt fa-2x"></i>
+                        </a></td>
+                </tr>
+                {% endfor %}
+               
+            </tbody>
+        </table>
+        <p>New Match
+            <a href="{% url 'add_match' %}"><i class="far fa-plus-square fa-2x"></i></a>
+        </p>
 {% endblock content %}
