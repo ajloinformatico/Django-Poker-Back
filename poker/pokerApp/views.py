@@ -75,9 +75,9 @@ def add_match(request, player_id):
             
         if match_form.is_valid():
             match_form.save()
-            ctx['match_form'] = None
-            ctx['matches'] = Match.objects.all()
-            return render(request, 'crud.html', ctx)
+            # call to crud view
+            #crud(request, request.POST['player_id'])
+            return redirect('../crud/'+request.POST['player_id'])
 
     return render(request, 'add_match.html', ctx)
 
@@ -98,10 +98,7 @@ def edit_match(request, player_id, team_id):
         }
         if match_form.is_valid():
             match_form.save()
-            ctx['matches_form'] = None
-            ctx['matches'] = Match.objects.all()
-            # jsut render crud content because i have ok the context
-            return render(request, 'crud.html', ctx)
+            return redirect('../../crud/'+request.POST['player_id'])
     
 
     return render(request, 'edit_match.html', ctx)
@@ -114,4 +111,4 @@ def delete_match(request, player_id, team_id):
         'matches' : Match.objects.all()
     }
     # redirect to crud with player id
-    return render (request, 'crud.html', ctx);
+    return redirect('../../crud/'+str(player_id))
