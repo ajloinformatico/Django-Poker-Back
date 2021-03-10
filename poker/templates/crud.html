@@ -20,10 +20,10 @@
                     <td>{{match.name}}</td>
                     <td>{{match.money}}</td>
                     <td>
-                        <a href="{% url 'edit_match' current_player.id match.id %}" alt="edit car" title="edit car">
+                        <a class="text-success" href="{% url 'edit_match' current_player.id match.id %}" alt="edit car" title="edit car">
                             <i class="fas fa-edit fa-2x"></i>
                         </a> 
-                        <a href="{% url 'delete_match' current_player.id match.id %}">
+                        <a class="text-danger" href="{% url 'delete_match' current_player.id match.id %}">
                             <i class="far fa-trash-alt fa-2x"></i>
                         </a>
                     </td>

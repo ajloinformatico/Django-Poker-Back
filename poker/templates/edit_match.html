@@ -2,17 +2,17 @@
 {% block title %} Edit Match {% endblock %}
 {% block current_player %}Welcome <b> {{current_player.nick}}</b>{% endblock current_player %}
 {% block content %}
-    <h1>Edit Car</h1>
-    
-    <form action="" method="POST" autocomplete="on">
+    <h4>Edit Car</h4>
+    <form class="text-center mt-5 mb-1" action="" method="POST" autocomplete="on">
         {% csrf_token %}
         <input type="hidden" name="player_id" value="{{current_player.id}}"/>
-        {{match_form}}
-        <input type="submit" value="Edit" title="edit"/>
+        {{match_form.as_p}}
+        <input class="btn btn-success" type="submit" value="Edit" title="edit"/>
+         <a class="btn btn-primary" href="{% url 'crud' current_player.id %}">
+            return back to matches
+        </a>
     </form>
-    <a class="button" href="{% url 'crud' current_player.id %}">
-        return back to matches
-    </a>
+   
     
 
 {% endblock content %}
