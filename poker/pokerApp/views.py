@@ -71,25 +71,27 @@ def edit_match(request, player_id, team_id):
     match = Match.objects.get(id=team_id)
     #print(match)
     if request.method == 'GET':
-        
         match_form = MatchForm(instance=match)
-        
         ctx = {
             'current_player' : Player.objects.get(id= player_id),
             'match_form' : match_form
         }     
-    """
+    
     if request.method == 'POST':
         # TODO: CHECK IF ONLY WITH POST PASS
-        match_form = MatchForm(request.POST, instance=Match)
+        match_form = MatchForm(request.POST, instance=match)
         ctx = {
-            'current_player' : Player.objects.get(id=int(request.POST['player_id'])),
+            'current_player' : Player.objects.get(id=request.POST['player_id']),
             'match_form': match_form
         }
+        print("yes")
         if match_form.is_valid():
             match_form.save()
-            return redirect('crud/'+request.POST['player_id'])
-    """
+            ctx['matches_form'] = None
+            ctx['matches'] = Match.objects.all()
+            # jsut render crud content because i have ok the context
+            return render(request, 'crud.html', ctx)
+    
 
     return render(request, 'edit_match.html', ctx)
 
